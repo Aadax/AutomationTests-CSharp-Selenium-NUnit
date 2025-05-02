@@ -1,11 +1,9 @@
-using Docker.DotNet.Models;
+using NUnit.Framework;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 
-namespace AutomationTests_CSharp_Selenium_NUnit
+namespace AutomationTests
 {
     public class BasePage
     {
@@ -22,7 +20,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             if (validation)
             {
-                //Wait.Until(ExpectedConditions.PageLoaded);
+                Wait.Until(ExpectedConditions.PageLoaded);
             }
         }
 
@@ -88,9 +86,66 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             return "";
         }
 
-        public IWebElement Find(By locator)
+        public IWebElement Find(By locator, int timeout = 30, bool validation = true)
         {
+            if (validation)
+            {
+                Wait.Timeout = TimeSpan.FromSeconds(timeout);
+                Wait.Until(ExpectedConditions.ElementIsVisible(locator));
+            }
             return Driver.FindElement(locator);
+        }
+
+        public List<IWebElement> FindMany(By locator, int timeout = 30, bool validation = true)
+        {
+            if (validation)
+            {
+                Wait.Timeout = TimeSpan.FromSeconds(timeout);
+                try
+                {
+                    Wait.Until(ExpectedConditions.ElementIsVisible(locator));
+                }
+                catch (WebDriverTimeoutException) 
+                {
+                    return Driver.FindElements(locator).ToList();
+                }
+            }
+            return Driver.FindElements(locator).ToList();
+        }
+
+        public void Cancel()
+        {
+            Wait.Timeout = TimeSpan.FromSeconds(30);
+            Wait.Until(ExpectedConditions.LoaderDisappears);
+
+            FindMany(By.XPath("ANULUJ"));
+
+            Wait.Timeout = TimeSpan.FromSeconds(30);
+            Wait.Until(ExpectedConditions.LoaderDisappears);
+        }
+
+        public void Next()
+        {
+            Wait.Timeout = TimeSpan.FromSeconds(30);
+            Wait.Until(ExpectedConditions.LoaderDisappears);
+            FindMany(By.XPath("NASTEPNY"));
+        }
+
+        public void WaitForElementToDisappear(By by, int timeout = 10)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
+
+            wait.Until(drv =>
+            {
+                try
+                {
+                    return !drv.FindElement(by).Displayed;
+                }
+                catch (NoSuchElementException)
+                {
+                    return true;
+                }
+            });
         }
     }
 }

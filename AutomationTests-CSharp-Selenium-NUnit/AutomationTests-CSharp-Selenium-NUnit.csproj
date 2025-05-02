@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>AutomationTests_CSharp_Selenium_NUnit</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fixtures\" />
+    <Folder Include="Fixture\" />
+    <Folder Include="PageObjectPattern\PageObjectModel\" />
     <Folder Include="Tests\" />
-    <Folder Include="PageObjects\" />
   </ItemGroup>
 
 </Project>
