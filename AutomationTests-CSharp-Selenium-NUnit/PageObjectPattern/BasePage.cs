@@ -1,18 +1,12 @@
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace AutomationTests
+namespace AutomationTests_CSharp_Selenium_NUnit
 {
     public class BasePage
     {
         protected readonly IWebDriver Driver;
         protected readonly WebDriverWait Wait;
-
-        private IWebElement test => Find(By.XPath("XYZ"));
-        private IWebElement loginButtonAuthorize => Find(By.XPath(".//span[@class = 'test' and text() = 'test']"));
-
 
         public BasePage(IWebDriver driver, bool validation = true)
         {
@@ -24,40 +18,11 @@ namespace AutomationTests
             }
         }
 
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
-        { 
-        }  
-
-        [Test]
-        public void TestMethod()
-        {
-            Assert.Pass();
-
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            
-        }
-
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            
-        }
-
-        public void EnterText(By locator, string text)
-        {
-            Driver.FindElement(locator).Clear();
-            Driver.FindElement(locator).SendKeys(text);
-        }
+        //public void EnterText(By locator, string text)
+        //{
+        //    Driver.FindElement(locator).Clear();
+        //    Driver.FindElement(locator).SendKeys(text);
+        //}
 
         public void Click(By locator)
         {
@@ -105,7 +70,7 @@ namespace AutomationTests
                 {
                     Wait.Until(ExpectedConditions.ElementIsVisible(locator));
                 }
-                catch (WebDriverTimeoutException) 
+                catch (WebDriverTimeoutException)
                 {
                     return Driver.FindElements(locator).ToList();
                 }

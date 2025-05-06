@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace AutomationTests
+namespace AutomationTests_CSharp_Selenium_NUnit
 {
     public sealed class ExpectedConditions
     {
         private ExpectedConditions() { }
 
-        public static Func<IWebDriver,IWebElement>ElementIsVisible(By locator)
+        public static Func<IWebDriver, IWebElement> ElementIsVisible(By locator)
         {
             return (driver) =>
             {
@@ -33,7 +33,7 @@ namespace AutomationTests
                 new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(PageLoaded);
                 return driver.FindElement(locator).Displayed;
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -58,7 +58,7 @@ namespace AutomationTests
                 element.SendKeys(value);
                 return false;
             }
-            catch (ElementNotInteractableException) 
+            catch (ElementNotInteractableException)
             {
                 return false;
             }
@@ -113,29 +113,63 @@ namespace AutomationTests
             };
         }
 
-        private static IWebElement ElementIfVisible(IWebElement element) 
+        private static IWebElement ElementIfVisible(IWebElement element)
         {
             return (element.Displayed && element.Enabled) ? element : null;
         }
+
+        ///OFC FRAMEWORK
+        //public static Func<IWebDriver, bool> PageLoaded = (Driver) =>
+        //{
+        //    var jsExec = (IJavaScriptExecutor)Driver;
+        //    try
+        //    {
+        //        if (Driver.PageSource.Contains("ant-select-item-option-content")
+        //        || Driver.PageSource.Contains("cssgridlegacy") 
+        //        || Driver.PageSource.Contains("ltr no-js")
+        //        || Driver.Url.Contains("sso")) //if React
+
+        //            return (string)(jsExec).ExecuteScript("return document.readyState;") == "complete";
+
+        //        return (long)(jsExec).ExecuteScript("return jQuery.active;") == 0 && (string)(jsExec).ExecuteScript("return document.readyState;") == "complete";
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //};
 
         public static Func<IWebDriver, bool> PageLoaded = (Driver) =>
         {
             var jsExec = (IJavaScriptExecutor)Driver;
             try
             {
+                var readyState = (string)jsExec.ExecuteScript("return document.readyState;");
                 if (Driver.PageSource.Contains("ant-select-item-option-content")
-                || Driver.PageSource.Contains("cssgridlegacy") || Driver.PageSource.Contains("ltr no-js")
-                || Driver.Url.Contains("sso")) //if React
-                    
-                return (string)(jsExec).ExecuteScript("return document.readyState;") == "complete";
-                    
-                return (long)(jsExec).ExecuteScript("return jQuery.active;") == 0 && (string)(jsExec).ExecuteScript("return document.readyState;") == "complete";
+                    || Driver.PageSource.Contains("cssgridlegacy")
+                    || Driver.PageSource.Contains("ltr no-js")
+                    || Driver.Url.Contains("sso"))
+                {
+                    return readyState == "complete";
+                }
+
+                var hasJQuery = (bool)jsExec.ExecuteScript("return typeof jQuery !== 'undefined';");
+                if (hasJQuery)
+                {
+                    return (long)jsExec.ExecuteScript("return jQuery.active;") == 0
+                           && readyState == "complete";
+                }
+                else
+                {
+                    return readyState == "complete";
+                }
             }
             catch
             {
                 return false;
             }
         };
+
 
         public static Func<IWebDriver, bool> LoaderDisappears = (Driver) =>
         {
@@ -160,7 +194,7 @@ namespace AutomationTests
                     var Text = element.Text;
                     Thread.Sleep(50);
 
-                    if (element.Size == Size  && element.Text == Text)
+                    if (element.Size == Size && element.Text == Text)
                     {
                         return element;
                     }

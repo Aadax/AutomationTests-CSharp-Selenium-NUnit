@@ -1,14 +1,14 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace AutomationTests
+namespace AutomationTests_CSharp_Selenium_NUnit
 {
     public class BaseElement
     {
         protected readonly IWebElement Element;
         protected WebDriverWait Wait;
 
-        public BaseElement(IWebElement element) 
+        public BaseElement(IWebElement element)
         {
             Element = element;
             Wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(5));
