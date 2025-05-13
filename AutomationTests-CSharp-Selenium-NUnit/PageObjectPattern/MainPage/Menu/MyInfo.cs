@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium;
 
-namespace AutomationTests_CSharp_Selenium_NUnit
+namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
 {
     public class MyInfo : BaseElement
     {

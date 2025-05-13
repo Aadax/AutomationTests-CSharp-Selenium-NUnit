@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium;
 
-namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern.PageObjectModel.Menu
+namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
 {
     public class Time : BaseElement
     {

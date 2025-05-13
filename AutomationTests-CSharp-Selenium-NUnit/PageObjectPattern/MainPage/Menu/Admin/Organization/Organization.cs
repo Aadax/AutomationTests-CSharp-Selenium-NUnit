@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
 {
-    public class Buzz : BaseElement
+    public class Organization : BaseElement
     {
-        public Buzz(IWebElement element) : base(element)
+        public Organization(IWebElement element) : base(element)
         {
             new Actions(GetDriver()).MoveToElement(element).Perform();
             Wait.Until(ExpectedConditions.ElementNotChanging(element));

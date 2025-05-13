@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace AutomationTests_CSharp_Selenium_NUnit
+namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
 {
     public class PIM : BaseElement
     {

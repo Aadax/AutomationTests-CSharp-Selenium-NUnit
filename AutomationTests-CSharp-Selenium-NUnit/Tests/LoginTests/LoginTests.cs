@@ -10,7 +10,6 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
         public void TestMethod()
         {
             LoginPO login = new LoginPO(Driver);
-
             login.Username.SendKeys("Admin");
             login.Password.SendKeys("admin123");
             login.LoginButtonClick();
