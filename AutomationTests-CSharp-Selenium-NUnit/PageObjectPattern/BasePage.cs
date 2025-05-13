@@ -112,5 +112,24 @@ namespace AutomationTests_CSharp_Selenium_NUnit
                 }
             });
         }
+
+        public void WaitForLoaderToDisappear(By loaderLocator, int timeout = 10)
+        {
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout))
+                .Until(driver => !driver.FindElements(loaderLocator).Any(e => e.Displayed));
+        }
+
+
+        public void ScrollToElement(By locator)
+        {
+            IWebElement element = Find(locator, 30, true);
+            ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+        }
+
+        public void WaitUntil(Func<IWebDriver, bool> condition, int timeout = 30)
+        {
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout)).Until(condition);
+        }
+
     }
 }

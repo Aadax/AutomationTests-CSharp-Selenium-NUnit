@@ -13,10 +13,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
 
             login.Username.SendKeys("Admin");
             login.Password.SendKeys("admin123");
-            //login.SendKe("Admin");
-            //login.FillInput("admin123");
             login.LoginButtonClick();
-            Thread.Sleep(6000);
         }
     }
 }

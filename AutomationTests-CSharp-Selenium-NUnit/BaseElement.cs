@@ -7,6 +7,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
     {
         protected readonly IWebElement Element;
         protected WebDriverWait Wait;
+        protected readonly int ClickRetries = 3;
 
         public BaseElement(IWebElement element)
         {
@@ -74,5 +75,23 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             IWrapsDriver wrapsElement = Element as IWrapsDriver;
             return wrapsElement.WrappedDriver;
         }
+
+        public void RetryClick(By locator, int ClickRetries = 3)
+        {
+            for (int i = 0; i < ClickRetries; i++)
+            {
+                try
+                {
+                    Find(locator).Click();
+                    return;
+                }
+                catch (Exception e) when (e is ElementClickInterceptedException || e is StaleElementReferenceException)
+                {
+                    Thread.Sleep(300);
+                }
+            }
+            throw new Exception($"Unable to click element: {locator} after {ClickRetries} attempts.");
+        }
+
     }
 }
