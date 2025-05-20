@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Reflection;
 
 namespace AutomationTests_CSharp_Selenium_NUnit
 {
@@ -93,5 +94,26 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             throw new Exception($"Unable to click element: {locator} after {ClickRetries} attempts.");
         }
 
+        //public void ScrollDown(string pixels = "150")
+        //{
+        //    IWebDriver driver = Element.GetDriver();
+        //    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+        //    js.ExecuteScript($"window.scrollBy(0, {pixels})", "");
+        //}
+
+        //public void GetDriver()
+        //{
+        //    IWrapsDriver wrappedElement = Element as IWrapsDriver;
+        //    if (wrappedElement == null)
+        //    {
+        //        FieldInfo fieldInfo = Element.GetType().GetField("underLyingElement", BindingFlags.NonPublic | BindingFlags.Instance);
+        //        if (fieldInfo != null)
+        //        {
+        //            wrappedElement = fieldInfo.GetValue(Element) as IWrapsDriver;
+        //            if (wrappedElement == null)
+        //                throw new ArgumentException("Element must wrap a web driver");
+        //        }
+        //    }
+        //}
     }
 }

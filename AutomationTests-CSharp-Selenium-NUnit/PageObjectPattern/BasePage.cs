@@ -131,5 +131,14 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout)).Until(condition);
         }
 
+        public bool IsAWindowSize()
+        {
+            var WindowSize = Driver.Manage().Window.Size;
+            bool isAWD = false;
+            if(WindowSize.Width < 700)
+                isAWD = true;
+
+            return isAWD;
+        }
     }
 }
