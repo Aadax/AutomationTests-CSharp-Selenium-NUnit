@@ -94,12 +94,12 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             throw new Exception($"Unable to click element: {locator} after {ClickRetries} attempts.");
         }
 
-        public void ScrollDown(string pixels = "150")
-        {
-            IWebDriver driver = Element.GetDriver();
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript($"window.scrollBy(0, {pixels})", "");
-        }
+        //public void ScrollDown(string pixels = "150")
+        //{
+        //    IWebDriver driver = Element.GetDriver();
+        //    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+        //    js.ExecuteScript($"window.scrollBy(0, {pixels})", "");
+        //}
 
         //public void GetDriver()
         //{

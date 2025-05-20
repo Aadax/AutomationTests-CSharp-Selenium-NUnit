@@ -26,18 +26,39 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             };
         }
 
-        public static bool ElementExists(By locator, IWebDriver driver)
+        //COMMERCIAL WITHOUT
+        //-new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(ElementIsVisible(locator));
+        //public static bool ElementExists(By locator, IWebDriver driver)
+        //{
+        //    try
+        //    {
+        //        new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(PageLoaded);
+        //        new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(ElementIsVisible(locator));
+        //        return driver.FindElement(locator).Displayed;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        public static bool ElementExists(By locator, IWebDriver driver, int timeoutSeconds = 5)
         {
             try
             {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(PageLoaded);
-                return driver.FindElement(locator).Displayed;
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutSeconds));
+                return wait.Until(d =>
+                {
+                    var elements = d.FindElements(locator);
+                    return elements.Any(e => e.Displayed);
+                });
             }
             catch
             {
                 return false;
             }
         }
+
 
         public static bool ElementExist(By locator, IWebDriver driver)
         {
@@ -139,37 +160,52 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         //    }
         //};
 
-        public static Func<IWebDriver, bool> PageLoaded = (Driver) =>
+
+        //COMMERCIAL
+        //public static Func<IWebDriver, bool> PageLoaded = (Driver) =>
+        //{
+        //    var jsExec = (IJavaScriptExecutor)Driver;
+        //    try
+        //    {
+        //        var readyState = (string)jsExec.ExecuteScript("return document.readyState;");
+        //        if (Driver.PageSource.Contains("ant-select-item-option-content")
+        //            || Driver.PageSource.Contains("cssgridlegacy")
+        //            || Driver.PageSource.Contains("ltr no-js")
+        //            || Driver.Url.Contains("sso"))
+        //        {
+        //            return readyState == "complete";
+        //        }
+
+        //        var hasJQuery = (bool)jsExec.ExecuteScript("return typeof jQuery !== 'undefined';");
+        //        if (hasJQuery)
+        //        {
+        //            return (long)jsExec.ExecuteScript("return jQuery.active;") == 0
+        //                   && readyState == "complete";
+        //        }
+        //        else
+        //        {
+        //            return readyState == "complete";
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //};
+
+        public static Func<IWebDriver, bool> PageLoaded = driver =>
         {
-            var jsExec = (IJavaScriptExecutor)Driver;
             try
             {
-                var readyState = (string)jsExec.ExecuteScript("return document.readyState;");
-                if (Driver.PageSource.Contains("ant-select-item-option-content")
-                    || Driver.PageSource.Contains("cssgridlegacy")
-                    || Driver.PageSource.Contains("ltr no-js")
-                    || Driver.Url.Contains("sso"))
-                {
-                    return readyState == "complete";
-                }
-
-                var hasJQuery = (bool)jsExec.ExecuteScript("return typeof jQuery !== 'undefined';");
-                if (hasJQuery)
-                {
-                    return (long)jsExec.ExecuteScript("return jQuery.active;") == 0
-                           && readyState == "complete";
-                }
-                else
-                {
-                    return readyState == "complete";
-                }
+                var jsExec = (IJavaScriptExecutor)driver;
+                string readyState = (string)jsExec.ExecuteScript("return document.readyState");
+                return readyState == "complete";
             }
             catch
             {
                 return false;
             }
         };
-
 
         public static Func<IWebDriver, bool> LoaderDisappears = (Driver) =>
         {

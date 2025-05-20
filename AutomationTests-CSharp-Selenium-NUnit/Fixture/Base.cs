@@ -46,6 +46,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         {
             Stopwatch = Stopwatch.StartNew();
             Driver = new EdgeDriver();
+            Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(Url);
         }
 
@@ -53,6 +54,15 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         public void FinishTest()
         {
             Stopwatch.Stop();
+
+            try
+            {
+                Driver?.Quit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error closing browser: {ex.Message}");
+            }
         }
 
         [OneTimeTearDown]

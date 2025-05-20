@@ -1,0 +1,5 @@
+﻿{
+  "LoginPage": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+  "DashboardPage": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
+  "PasswordResetPage": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/requestPasswordResetCode"
+}
