@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Reflection;
 
 namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
 {
