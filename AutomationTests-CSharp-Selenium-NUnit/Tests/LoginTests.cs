@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
+namespace AutomationTests_CSharp_Selenium_NUnit
 {
     [TestFixture]
     [Category("Login Tests")]
@@ -35,7 +35,11 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
             login.LoginButtonClick();
             Step("User should get alert about invalid credentials");
 
-            Assert.That(ExpectedConditions.ElementExists(login.InvalidLoginAlert, Driver), "Missing invalid login credentials alert");
+            Assert.Multiple(() =>
+            {
+                Assert.That(ExpectedConditions.ElementExists(login.InvalidLoginAlert, Driver), "Missing invalid login credentials alert");
+                Assert.That(login.InvalidLoginAlertText, Is.EqualTo("Invalid credentials"), "Invalid text on login alert");
+            });
         }
 
         [TestCase(Category = "Login", TestName = "Login missing credential - negative authorization")]
@@ -49,7 +53,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
             login.LoginButtonClick();
             Step("User should get message about required missing data");
 
-            Assert.That(login.InvalidCredentialsMessage, Is.EqualTo("Required"));
+            Assert.That(login.InvalidCredentialsMessage, Is.EqualTo("Required"), "Message does not provide information that the password is required");
         }
 
         [TestCase(Category = "Login", TestName = "Login forgotten password - reset password")]
@@ -64,7 +68,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
             resetPassword.UsernameInput.SendKeys("Admin");
             resetPassword.ResetPasswordButtonClick();
 
-            Assert.That(resetPassword.Header, Is.EqualTo("Reset Password link sent successfully"));
+            Assert.That(resetPassword.Header, Is.EqualTo("Reset Password link sent successfully"), "Missing message about sending password reset link");
         }
 
         [TestCase(Category = "Login", TestName = "Login forgotten password - cancel process")]

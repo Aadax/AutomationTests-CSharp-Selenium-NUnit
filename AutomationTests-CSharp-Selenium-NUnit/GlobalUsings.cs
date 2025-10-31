@@ -1,2 +1,1 @@
-﻿
-global using static AutomationTests_CSharp_Selenium_NUnit.Helpers;
+﻿global using static AutomationTests_CSharp_Selenium_NUnit.Helpers;

@@ -11,7 +11,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern.MainPage
 
         private Claim Claim => new(Find(By.XPath(".//span[text() = 'Claim']")));
 
-        private Dashboard Dashboard => new(Find(By.XPath(".//span[text() = 'Dashboard']")));
+        private DashboardPO Dashboard => new(Find(By.XPath(".//span[text() = 'Dashboard']")));
 
         private Directory Directory => new(Find(By.XPath(".//span[text() = 'Directory']")));
 

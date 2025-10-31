@@ -26,7 +26,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             };
         }
 
-        //COMMERCIAL WITHOUT
+        //COMMERCIAL EXCLUDE
         //-new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(ElementIsVisible(locator));
         //public static bool ElementExists(By locator, IWebDriver driver)
         //{
