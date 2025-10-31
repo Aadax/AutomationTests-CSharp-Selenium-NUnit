@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
+namespace AutomationTests_CSharp_Selenium_NUnit
 {
     public class LoginPO : BasePage
     {
@@ -13,6 +13,8 @@ namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
         private IWebElement LoginButton => Find(By.XPath(".//button[contains(@class, 'oxd-button') and @type= 'submit']"));
 
         public readonly By InvalidLoginAlert = By.XPath("//*[@class= 'orangehrm-login-error']/div[@role = 'alert']");
+
+        public string InvalidLoginAlertText => Find(By.XPath("//*[@class= 'orangehrm-login-error']/div[@role = 'alert']")).Text; 
 
         public string InvalidCredentialsMessage => Find(By.XPath(".//span[contains(@class, 'input-field-error-message') and text()='Required']")).Text;
 

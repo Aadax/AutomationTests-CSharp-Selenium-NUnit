@@ -58,6 +58,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             try
             {
                 Driver?.Quit();
+                Driver?.Dispose();
             }
             catch (Exception ex)
             {
@@ -65,10 +66,10 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             }
         }
 
-        [OneTimeTearDown]
-        public void Finish()
-        {
-            Driver?.Quit();
-        }
+        //[OneTimeTearDown]
+        //public void Finish()
+        //{
+        //    Driver?.Quit();
+        //}
     }
 }

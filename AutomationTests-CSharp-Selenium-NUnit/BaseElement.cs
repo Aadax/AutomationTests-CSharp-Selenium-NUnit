@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System.Reflection;
 
 namespace AutomationTests_CSharp_Selenium_NUnit
 {

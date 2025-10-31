@@ -1,8 +1,7 @@
-﻿using Docker.DotNet.Models;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern
+namespace AutomationTests_CSharp_Selenium_NUnit
 {
     public class ResetPasswordPO : BasePage
     {
