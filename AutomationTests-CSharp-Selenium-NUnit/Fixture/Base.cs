@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
 
 
@@ -45,7 +45,14 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         public void Prepare()
         {
             Stopwatch = Stopwatch.StartNew();
-            Driver = new EdgeDriver();
+            var options = new ChromeOptions();
+
+            options.AddArgument("--headless=new");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--window-size=1920,1080");
+
+            Driver = new ChromeDriver(options);
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(Url);
         }
@@ -65,11 +72,5 @@ namespace AutomationTests_CSharp_Selenium_NUnit
                 Console.WriteLine($"❌ Error closing browser: {ex.Message}");
             }
         }
-
-        //[OneTimeTearDown]
-        //public void Finish()
-        //{
-        //    Driver?.Quit();
-        //}
     }
 }
