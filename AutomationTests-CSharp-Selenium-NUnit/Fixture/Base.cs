@@ -10,7 +10,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
     {
         protected IWebDriver Driver;
         private Stopwatch Stopwatch;
-        private string browserMachineName;
+        //private string browserMachineName;
 
         protected readonly string Url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
@@ -69,7 +69,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Error closing browser: {ex.Message}");
+                Console.WriteLine($"❌ Error while closing browser: {ex.Message}");
             }
         }
     }
