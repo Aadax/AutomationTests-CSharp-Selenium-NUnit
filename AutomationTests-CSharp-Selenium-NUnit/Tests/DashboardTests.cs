@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AutomationTests_CSharp_Selenium_NUnit.PageObjectPattern;
+using NUnit.Framework;
 
 namespace AutomationTests_CSharp_Selenium_NUnit
 {
@@ -9,14 +10,9 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         [Description("User should get redirected to the Time option")]
         public void DashboardPunchIn()
         {
-            LoginPO loginPO = new LoginPO(Driver);
+            LoginPage loginPage = new LoginPage(Driver);
             Step("User logs in to the app");
-            loginPO.Username.SendKeys("Admin");
-            loginPO.Password.SendKeys("admin123");
-            loginPO.LoginButtonClick();
-            
-            //TODO
-            //DashboardPO dashboard = new DashboardPO(element);
+            loginPage.LoginAs();
         }
     }
 }

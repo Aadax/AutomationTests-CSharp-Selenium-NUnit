@@ -1,8 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using AutomationTests_CSharp_Selenium_NUnit.Fixture.DataModels.LoginCredentials;
+using OpenQA.Selenium;
 
 namespace AutomationTests_CSharp_Selenium_NUnit
 {
-    public class LoginPO : BasePage
+    public class LoginPage : BasePage
     {
         public static readonly string BaseUrl = Environment.GetEnvironmentVariable("BASE_URL") ?? "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
@@ -20,10 +21,29 @@ namespace AutomationTests_CSharp_Selenium_NUnit
 
         private IWebElement ForgorPasswordButton => Find(By.XPath("//*[contains(@class, 'orangehrm-login-forgot-header') and normalize-space()='Forgot your password?']"));
 
-        public LoginPO(IWebDriver Driver) : base(Driver) { }
+        public LoginPage(IWebDriver Driver) : base(Driver) { }
 
         public void LoginButtonClick() => LoginButton.Click();
 
         public void ForgotPasswordButtonClick() => ForgorPasswordButton.Click();
+
+        public void LoginAs()
+        {
+            var credentials = Credentials.Value;
+            Login(credentials.Username, credentials.Password);
+        }
+
+        private void Login(string username, string password)
+        {
+            Username.Clear();
+            Username.SendKeys(username);
+            Password.Clear();
+            Password.SendKeys(password);
+            LoginButton.Click();
+        }
+
+        private static readonly Lazy<LoginCredentials> Credentials =
+            new Lazy<LoginCredentials>(() =>
+                Helpers.LoadJson<LoginCredentials>("Fixture/DataModels/LoginCredentials/LoginCredentials.json"));
     }
 }

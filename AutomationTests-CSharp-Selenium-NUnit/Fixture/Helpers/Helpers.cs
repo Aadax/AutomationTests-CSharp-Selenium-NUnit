@@ -14,6 +14,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             TestContext.Progress.WriteLine(message);
         }
 
+        #region JSON Files Helpers
         private static string FindJsonFile(string relativePath)
         {
             var currentDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -32,6 +33,13 @@ namespace AutomationTests_CSharp_Selenium_NUnit
             throw new FileNotFoundException($"❌ Nie znaleziono pliku JSON pod ścieżką względną: {relativePath}");
         }
 
+        public static T LoadJson<T>(string relativePath)
+        {
+            var jsonPath = FindJsonFile(relativePath);
+            var jsonContent = File.ReadAllText(jsonPath);
+            return JsonSerializer.Deserialize<T>(jsonContent);
+        }
+        #endregion
 
         private static void EnsureUrlsLoaded()
         {

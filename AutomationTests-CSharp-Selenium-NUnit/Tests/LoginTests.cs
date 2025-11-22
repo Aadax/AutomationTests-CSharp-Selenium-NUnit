@@ -10,7 +10,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         [Description("User is able to log in to the app")]
         public void LoginAuthorization()
         {
-            LoginPO login = new LoginPO(Driver);
+            LoginPage login = new LoginPage(Driver);
             Step("User enter nickname");
             login.Username.SendKeys("Admin");
             Step("User enter password");
@@ -26,7 +26,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         [Description("User should get message about invalid credentials")]
         public void LoginIncorrectPassword()
         {
-            LoginPO login = new LoginPO(Driver);
+            LoginPage login = new LoginPage(Driver);
             Step("User enter incorrect nickname");
             login.Username.SendKeys("INCORRECT USERNAME");
             Step("User enter incorrect password");
@@ -46,7 +46,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         [Description("User should get message about missing required credentials")]
         public void LoginMissingCredential()
         {
-            LoginPO login = new LoginPO(Driver);
+            LoginPage login = new LoginPage(Driver);
             Step("User enter nickname");
             login.Username.SendKeys("Admin");
             Step("User click on login button");
@@ -60,7 +60,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         [Description("User forget password and clicks reset password button")]
         public void LoginForgottenPassword() 
         {
-            LoginPO login = new LoginPO(Driver);
+            LoginPage login = new LoginPage(Driver);
             login.ForgotPasswordButtonClick();
             AssertCurrentUrl(Driver, "PasswordResetPage");
             
@@ -75,7 +75,7 @@ namespace AutomationTests_CSharp_Selenium_NUnit
         [Description("User forget password and clicks cancel button on reset password page")]
         public void LoginForgettenPasswordCancel()
         {
-            LoginPO login = new LoginPO(Driver);
+            LoginPage login = new LoginPage(Driver);
             login.ForgotPasswordButtonClick();
             AssertCurrentUrl(Driver, "PasswordResetPage");
 
