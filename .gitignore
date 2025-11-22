@@ -6,6 +6,9 @@
 *.suo
 *.userosscache
 *.sln.docstates
+.project
+.classpath
+.settings/
 
 ## === BUILD ARTEFACTS ===
 bin/
